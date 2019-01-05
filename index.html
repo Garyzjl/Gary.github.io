@@ -392,7 +392,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/01/03/Django-day02/" class="post-title-link" itemprop="url">Django day02</a>
+                <a href="/2019/01/03/Django-day02/" class="post-title-link" itemprop="url">Django</a>
               
             
           </h1>
@@ -417,12 +417,24 @@
                 
               
 
-              <time title="创建时间：2019-01-03 09:48:06 / 修改时间：11:53:03" itemprop="dateCreated datePublished" datetime="2019-01-03T09:48:06+08:00">2019-01-03</time>
+              <time title="创建时间：2019-01-03 09:48:06" itemprop="dateCreated datePublished" datetime="2019-01-03T09:48:06+08:00">2019-01-03</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-01-05 11:37:22" itemprop="dateModified" datetime="2019-01-05T11:37:22+08:00">2019-01-05</time>
               
             
           </span>
@@ -457,7 +469,30 @@
       
         
           
-            <h2 id="Django模型"><a href="#Django模型" class="headerlink" title="Django模型"></a>Django模型</h2><h3 id="ORM-object-relationship-mapping-对象关系型映射"><a href="#ORM-object-relationship-mapping-对象关系型映射" class="headerlink" title="ORM(object relationship mapping)对象关系型映射"></a>ORM(object relationship mapping)对象关系型映射</h3>
+            <h2 id="Django虚拟环境构建"><a href="#Django虚拟环境构建" class="headerlink" title="Django虚拟环境构建"></a>Django虚拟环境构建</h2><ol>
+<li>安装virtualenv<br>在cmd终端控制台，输入：pip install virtualenv</li>
+<li>创建虚拟环境<br>可创建一个专门放置虚拟环境的文件夹env（个人习惯），在cmd来到该文件夹下，输入：virtualenv –no-site-packages -p pyhon版本路径\python.exe name<br>注：1.–no-site-packages:表示创建的虚拟环境为纯净的环境，不安装有其他的库。<br>2.-p：表示虚拟环境中的python版本。如果只安装有一个python版本，-p pyhon版本路径\python.exe可以省略不写。直接输入：virtualenv –no-site-packages  name<br>3.name 为创建虚拟环境配置文件夹名称</li>
+<li>激活虚拟环境<br>输入：cd name(创建时的名称) Scripts   来到该路径下<br>输入：activate   激活虚拟环境<br>退出虚拟环境：deactivate</li>
+<li>安装Django库<br>输入：pip install django<br>成功安装后，即环境创建成功！<h2 id="创建Django项目"><a href="#创建Django项目" class="headerlink" title="创建Django项目"></a>创建Django项目</h2></li>
+<li>创建项目<br>可创建一个目录用于单独存放Django项目。在cmd控制台来到所创建的目录下，<br>输入：django-admin startproject name(项目名称)</li>
+<li>打开项目,并配置<br>2.1 用pycharm打开创建好的项目，在file-settings-Project: name(项目名称)-Project Interpreter中的Project Interpreter选中所创建好的虚拟环境的Scripts下的python.exe。<br>2.2 在pycharm 主界面的右上方，创建的name(项目名称)处单击, 点Edit-Configurations,来到Run/Debug configurations界面；点加号，修改Name为创建项目的name(项目名称)；Scripts path选择创建项目中manage.py文件；<br>2.3.Parameters中输入：runserver 端口。端口默认为8000，可输入自定义设置的端口号。<br>2.4 点击OK，完成</li>
+<li>创建应用<br>在Terminal 中输入：python manage.py startapp app(应用名称)<h2 id="启动Django项目"><a href="#启动Django项目" class="headerlink" title="启动Django项目"></a>启动Django项目</h2>在pycharm的Terminal中输入：python manage.py runserver<br>注：要在创建虚拟环境的下输入<h2 id="数据库准备"><a href="#数据库准备" class="headerlink" title="数据库准备"></a>数据库准备</h2></li>
+<li>settings配置<br>在settings中的DATABASES中配置参数<br>ENGING: ‘django.db.backends.mysql’    根据所用数据类型设置，例如本人使用的是mysql<br>USER: 访问用户<br>PASSWORD: 密码<br>HOST: 访问数据库的地址<br>PORT: 访问数据库的端口<br>NAME: 数据库名称<br>TIME_ZONE: 所在时区（默认为UTC，可以不设置）</li>
+<li>安装、配置pymysql<br>在Terminal 中输入: pip install pymysql<br>在工程目录下<strong>init</strong>.py文件中定义：pymysql.install_as_MySQLdb()</li>
+<li>迁移<br>第一次迁移：Terminal中输入：python manage.py migrate<br>除开第一次迁移：<br>生成文件迁移<br>Terminal中输入：python manage.py makemigrations<br>执行迁移文件<br>Terminal中输入：python manage.py migrate</li>
+<li>创建管理员账号<br>Terminal中输入：python manage.py createsuperuser<h2 id="ORM-object-relationship-mapping-对象关系型映射"><a href="#ORM-object-relationship-mapping-对象关系型映射" class="headerlink" title="ORM(object relationship mapping)对象关系型映射"></a>ORM(object relationship mapping)对象关系型映射</h2><h6 id="模型设计"><a href="#模型设计" class="headerlink" title="模型设计"></a>模型设计</h6>1.创建模型<br>在models.py文件中创建模型<br>例如：创建一个学生模型<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">class Student(models.Model):</span><br><span class="line">    s_name = models.CharField(max_length=10, unique=True)</span><br><span class="line">    s_age = models.IntegerField(default=10)</span><br><span class="line">    s_gender = models.BooleanField(default=0)</span><br><span class="line">    create_time = models.DateTimeField(auto_now_add=True)</span><br><span class="line">    update_time = models.DateTimeField(auto_now=True)</span><br><span class="line">    math = models.DecimalField(max_digits=3, decimal_places=1, null=True)</span><br><span class="line">    physics = models.DecimalField(max_digits=3, decimal_places=1, null=True)</span><br><span class="line"></span><br><span class="line">    class Meta:</span><br><span class="line">        db_table = &apos;student&apos;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>注：1.指定db_table参数，表示模型迁移时，映射到数据库中的表名称。<br>   2.如果没指定db_table参数，则数据库中模型映射的表名为：<code>app_模型名称</code>的小写.</p>
+<ol start="2">
+<li>字段类型<br>CharField: 字符串类型<br>IntegerField: 整型<br>ImageField：字符串类型，用于图片<br>BooleanField: 布尔，True 或者 False<br>DateTimeField: 日期，年月日时分秒<br>DateField: 年月日<br>TextField: 存储长文本内容，areatext标签<br>FloatField: 浮点类型<br>DecimalField: 浮点类型，限制最大长度和小数点后的长度</li>
+<li>约束<br>unique：是否唯一<br>default：默认值<br>null：是否可以为空<br>primary_key: 主键<br>auto_now_add: 创建时，默认赋值为当前时间<br>auto_now: 创建或修改时，默认值为当前时间<br>max_length: 最大长度<br>related_name: 反向查询名称，即别名</li>
+</ol>
+<p>on_delete: 删除的约束条件：<br>    models.CASCADE 删除主表，从表也会被删<br>    models.PROTECT 不能删除主表<br>    models.SET_NULL 删除主表，从表的关联字段设置为空</p>
+<ol start="4">
+<li>一对一模型，1:1<br>4.1存储方式<br>4.1.1 关联字段存储1：stu_info.关联字段 = 关联对象</li>
+</ol>
+
           
         
       
@@ -912,6 +947,19 @@
 
               
 
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
               
             </nav>
           
